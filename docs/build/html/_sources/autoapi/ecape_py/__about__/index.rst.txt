@@ -1,0 +1,14 @@
+:py:mod:`ecape_py.__about__`
+============================
+
+.. py:module:: ecape_py.__about__
+
+
+Module Contents
+---------------
+
+.. py:data:: __version__
+   :value: '0.0.1'
+
+   
+
