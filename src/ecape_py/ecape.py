@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 """Calculate the entraining CAPE (ECAPE) of a parcel"""
-from typing import Callable, List, Tuple, Union
+from typing import Callable, Tuple
 
 import metpy.calc as mpcalc
 import numpy as np
@@ -309,7 +309,7 @@ def calc_psi(el_z: pint.Quantity) -> pint.Quantity:
 @check_units("[length]", "[pressure]", "[temperature]", "[mass]/[mass]", "[speed]", "[speed]")
 def calc_ecape(
     height: PintList,
-    pressure:PintList,
+    pressure: PintList,
     temperature: PintList,
     specific_humidity: PintList,
     u_wind: PintList,
