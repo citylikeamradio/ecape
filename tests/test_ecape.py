@@ -13,7 +13,7 @@ from src.ecape_py.ecape import (
     calc_lfc_height,
     calc_mse,
     calc_ncape,
-    calc_pitchfork,
+    calc_psi,
     calc_sr_wind,
 )
 
@@ -47,6 +47,7 @@ def test_end_to_end_ecape():
     """
 
     height, pressure, temperature, specific_humidity, u_wind, v_wind, dew_point_temperature = sample_data()
+
     for cape_type in ['most_unstable', 'surface_based', 'mixed_layer']:
         ecape = calc_ecape(height, pressure, temperature, specific_humidity, u_wind, v_wind, cape_type)
         print(f"{cape_type}: {ecape}")
@@ -54,15 +55,16 @@ def test_end_to_end_ecape():
     assert ecape
 
 
-def test_calc_pitchfork():
+def test_calc_psi():
     """
     values via author's published matlab scripts (sigma = 1.6)
     https://figshare.com/articles/software/ECAPE_scripts/21859818
     """
 
     el_z = 11750.0 * units("m")
-    pitchfork = calc_pitchfork(el_z)
-    assert pitchfork.magnitude == approx(0.0034, rel=0.001)
+
+    psi = calc_psi(el_z)
+    assert psi.magnitude == approx(0.0034, rel=0.001)
 
 
 def test_calc_ecape_a():
@@ -71,12 +73,13 @@ def test_calc_ecape_a():
     https://figshare.com/articles/software/ECAPE_scripts/21859818
     """
 
-    sr_wind = 16.662798431352986
-    pitchfork = 0.003401863644631
-    ncape = 7.604878130037112e02
-    cape = 3.530029673046427e03
-    ecape_a = calc_ecape_a(sr_wind, pitchfork, ncape, cape)
-    assert ecape_a == approx(3.343908138651551e03 , rel=0.0001)
+    sr_wind = 16.662798431352986 * units('m/s')
+    psi = 0.003401863644631 * units('dimensionless')
+    ncape = 7.604878130037112e02 * units('m**2/s**2')
+    cape = 3.530029673046427e03 * units('J/kg')
+
+    ecape_a = calc_ecape_a(sr_wind, psi, ncape, cape)
+    assert ecape_a.magnitude == approx(3.343908138651551e03 , rel=0.0001)
 
 
 def test_calc_integral_arg():
@@ -87,15 +90,15 @@ def test_calc_integral_arg():
 
     intarg_loc = Path("./intarg.txt")
     data = np.genfromtxt(intarg_loc, delimiter=",")
-    mseo_bar = data[:, 0]
-    mseo_star = data[:, 1]
-    t0 = data[:, 2]
+    mseo_bar = data[:, 0] * units("J/kg")
+    mseo_star = data[:, 1] * units("J/kg")
+    t0 = data[:, 2] * units('K')
     int_arg = data[:, 3]
 
     integral_arg = calc_integral_arg(mseo_bar, mseo_star, t0)
 
-    for test, verify in zip(integral_arg.magnitude, int_arg):
-        assert test == approx(verify, rel=0.0001)
+    for test, verify in zip(integral_arg, int_arg):
+        assert test.magnitude == approx(verify, rel=0.0001)
 
 
 def test_calc_ncape():
@@ -106,32 +109,34 @@ def test_calc_ncape():
 
     ncape_loc = Path("./ncape.txt")
     data = np.genfromtxt(ncape_loc, delimiter=",")
-    integral_arg = data[:, 0]
-    height = data[:, 1]
+    integral_arg = data[:, 0] * units('m/s**2')
+    height = data[:, 1] * units('m')
     lfc_idx = 16
     el_idx = 117
 
     ncape = calc_ncape(integral_arg, height, lfc_idx, el_idx)
-    assert ncape == 7.604878130037112e02
+    assert ncape.magnitude == 7.604878130037112e02
 
 
 def test_calc_mse():
     """
-
+    values via author's published matlab scripts (sigma = 1.6)
+    https://figshare.com/articles/software/ECAPE_scripts/21859818
     """
+
     height, pressure, temperature, specific_humidity, u_wind, v_wind, dew_point_temperature = sample_data()
 
     mseo_loc = Path("./mseo.txt")
     data = np.genfromtxt(mseo_loc, delimiter=",")
-    mse0_bar = data[:, 1]
-    mse0_star = data[:, 2]
+    mse0_bar = data[:, 1] * units('J/kg')
+    mse0_star = data[:, 2] * units('J/kg')
 
     mseo_bar_sounding, mseo_star_sounding = calc_mse(pressure, height, temperature, specific_humidity)
 
-    for test, verify in zip(mseo_bar_sounding.magnitude, mse0_bar):
-        assert test == approx(verify, rel=.005)
-    for test, verify in zip(mseo_star_sounding.magnitude, mse0_star):
-        assert test == approx(verify, rel=.005)
+    for test, verify in zip(mseo_bar_sounding, mse0_bar):
+        assert test.magnitude == approx(verify, rel=.005)
+    for test, verify in zip(mseo_star_sounding, mse0_star):
+        assert test.magnitude == approx(verify, rel=.005)
 
 
 def test_calc_sr_wind():
@@ -167,12 +172,14 @@ def test_calc_el_height():
     COMPUTE_ECAPE.m: MU_EL_idx: 117, MU_EL: 11750 -> ECAPE 3087
     calc_el_height.py: el_idx: 115, el_z: 11500 -> ECAPE: 3089
 
-    Given a modest (~.1 %) impact on the resultant ECAPE (via the ncape & pitchfork calculations)
+    Given a modest (~.1 %) impact on the resultant ECAPE (via the ncape & psi calculations)
     a process leveraging metpy.calc.el was used for code readability and consistency.
     """
 
     height, pressure, temperature, specific_humidity, u_wind, v_wind, dew_point_temperature = sample_data()
+
     el_idx, el_z = calc_el_height(pressure, height, temperature, dew_point_temperature, most_unstable_parcel)
+
     assert el_idx == 115
     assert el_z.magnitude == 11500
 
@@ -190,6 +197,8 @@ def test_calc_lfc_height():
     """
 
     height, pressure, temperature, specific_humidity, u_wind, v_wind, dew_point_temperature = sample_data()
+
     lfc_idx, lfc_z = calc_lfc_height(pressure, height, temperature, dew_point_temperature, most_unstable_parcel)
+
     assert lfc_idx == 18
     assert lfc_z.magnitude == 1800
