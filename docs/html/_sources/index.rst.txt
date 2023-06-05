@@ -60,7 +60,7 @@ Future Work
 Disclaimer
 -------------
 There is a ~10% difference in ECAPE between calc_ecape and Peters' published matlab scripts.
-This is primarily due to a difference in calculated CAPE. The tests describe other sources of error.
+This is primarily due to a difference in calculated CAPE. The tests describe other sources of error (~1%).
 
 Since:
  - the methods here are within ~1% of Peters' calculations when CAPE is equivalent in the sample data
