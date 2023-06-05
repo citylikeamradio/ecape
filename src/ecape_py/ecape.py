@@ -375,3 +375,6 @@ def calc_ecape(
     ecape_a = calc_ecape_a(sr_wind, psi, ncape, cape)
 
     return ecape_a
+
+if __name__ == "__main__":
+    pass
