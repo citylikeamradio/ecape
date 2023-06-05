@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 exclude = ["/docs", "/tests"]
 
 [tool.hatch.build.targets.wheel]
-exclude = ["src/ecape_py"]
+packages = ["src/ecape_py"]
 
 [project]
 name = "ecape"
