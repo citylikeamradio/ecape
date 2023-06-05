@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 exclude = ["/docs", "/tests"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ecape_py"]
+packages = ["src/ecape", "docs", "tests"]
 
 [project]
 name = "ecape"
@@ -42,7 +42,7 @@ Issues = "https://github.com/citylikeamradio/ecape/issues"
 Source = "https://github.com/citylikeamradio/ecape"
 
 [tool.hatch.version]
-path = "src/ecape_py/__about__.py"
+path = "src/ecape/__about__.py"
 
 [tool.hatch.envs.default]
 dependencies = [
@@ -72,7 +72,7 @@ dependencies = [
   "ruff>=0.0.243",
 ]
 [tool.hatch.envs.lint.scripts]
-typing = "mypy --install-types --non-interactive {args:src/ecape_py tests}"
+typing = "mypy --install-types --non-interactive {args:src/ecape tests}"
 style = [
   "ruff {args:.}",
   "black --check --diff {args:.}",
@@ -138,7 +138,7 @@ unfixable = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["ecape_py"]
+known-first-party = ["ecape"]
 
 [tool.ruff.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -148,15 +148,15 @@ ban-relative-imports = "all"
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
 
 [tool.coverage.run]
-source_pkgs = ["ecape_py", "tests"]
+source_pkgs = ["ecape", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/ecape_py/__about__.py",
+  "src/ecape/__about__.py",
 ]
 
 [tool.coverage.paths]
-ecape_py = ["src/ecape_py", "*/ecape/src/ecape_py"]
+ecape = ["src/ecape", "*/ecape/src/ecape"]
 tests = ["tests", "*/ecape/tests"]
 
 [tool.coverage.report]

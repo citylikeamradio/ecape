@@ -161,6 +161,7 @@ def calc_mse(
     pressure: PintList, height: PintList, temperature: PintList, specific_humidity: PintList
 ) -> Tuple[PintList, PintList]:
     """
+    Calculate the moist static energy terms of interest.
 
     Args:
         pressure:
@@ -320,20 +321,20 @@ def calc_ecape(
     Calculate the entraining CAPE (ECAPE) of a parcel
 
     Parameters:
-    ----------
-        height:
+    ------------
+        height: np.ndarray[pint.Quantity]
             Atmospheric heights at the levels given by 'pressure'.
-        pressure:
+        pressure: np.ndarray[pint.Quantity]
             Total atmospheric pressure
-        temperature:
+        temperature: np.ndarray[pint.Quantity]
             Air temperature
-        specific humidity:
+        specific humidity: np.ndarray[pint.Quantity]
             Specific humidity
-        u_wind:
+        u_wind: np.ndarray[pint.Quantity]
             X component of the wind
-        v_wind
+        v_wind np.ndarray[pint.Quantity]
             Y component of the wind
-        cape_type:
+        cape_type: np.ndarray[pint.Quantity]
             Variation of CAPE desired. 'most_unstable' (default), 'surface_based', or 'mixed_layer'
 
     Returns:

@@ -1,10 +1,10 @@
-ecape\_py package
+calcs package
 =================
 
-ecape\_py
+calcs
 ----------------------
 
-.. automodule:: ecape_py.ecape
+.. automodule:: src.ecape.calc
    :members:
    :undoc-members:
    :show-inheritance:

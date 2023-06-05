@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ecape_py package" href="ecape_py.html" /> 
+    <link rel="next" title="calcs package" href="ecape.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,7 +43,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">home</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ecape_py.html">ecape_py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecape.html">ecape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">example</a></li>
 </ul>
 
         </div>
@@ -76,33 +77,60 @@
 <h1>ecape<a class="headerlink" href="#ecape" title="Permalink to this heading"></a></h1>
 <p>ecape is a simple module that contains an entraining CAPE, or ECAPE, calculation described by <span id="id1">Peters <em>et al.</em> [<a class="reference internal" href="#id5" title="John M. Peters, Daniel R. Chavas, Hugh Morrison, Chun-Yian Su, and Brice E. Coffer. An analytic formula for entraining cape in mid-latitude storm environments. 2023. arXiv:2301.04712.">PCM+23</a>]</span>.
 Additionally, <span id="id2">Peters [<a class="reference internal" href="#id6" title="John Peters. ECAPE scripts. 2 2023. URL: https://figshare.com/articles/software/ECAPE_scripts/21859818, doi:10.6084/m9.figshare.21859818.v4.">Pet23</a>]</span> -provided MatLab scripts serve as a reference and test verification data.
-The module leans heavily on Metpy [<span id="id3">May <em>et al.</em> [<a class="reference internal" href="#id7" title="Ryan M. May, Sean C. Arms, Patrick Marsh, Eric Bruning, John R. Leeman, Kevin Goebbert, Jonathan E. Thielen, Zachary S Bruick, and M. Drew. Camron. Metpy: a Python package for meteorological data. 2023. URL: Unidata/MetPy, doi:10.5065/D6WW7G29.">MAM+23</a>]</span>] for meteorological calculations.</p>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+The module leans heavily on MetPy [<span id="id3">May <em>et al.</em> [<a class="reference internal" href="#id7" title="Ryan M. May, Sean C. Arms, Patrick Marsh, Eric Bruning, John R. Leeman, Kevin Goebbert, Jonathan E. Thielen, Zachary S Bruick, and M. Drew. Camron. Metpy: a Python package for meteorological data. 2023. URL: Unidata/MetPy, doi:10.5065/D6WW7G29.">MAM+23</a>]</span>] for meteorological calculations.</p>
+<p>Package published via <a class="reference external" href="https://hatch.pypa.io/latest/">Hatch</a>.</p>
+<section id="installation-use">
+<h2>Installation &amp; Use<a class="headerlink" href="#installation-use" title="Permalink to this heading"></a></h2>
 <p>To use ecape, install it with pip:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install ecape</span>
 </pre></div>
 </div>
+<p>See the <a class="reference internal" href="example.html#example"><span class="std std-ref">example</span></a> page.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ecape.calc</span> <span class="kn">import</span> <span class="n">calc_ecape</span>
+<span class="o">...</span>
+<span class="n">ecape</span> <span class="o">=</span> <span class="n">calc_ecape</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">specific_humidity</span><span class="p">,</span> <span class="n">u_wind</span><span class="p">,</span> <span class="n">v_wind</span><span class="p">,</span> <span class="n">cape_type</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="source">
+<h2>Source<a class="headerlink" href="#source" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/citylikeamradio/ecape">https://github.com/citylikeamradio/ecape</a></p>
 </section>
 <section id="contact">
 <h2>Contact<a class="headerlink" href="#contact" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>Robert Capella</p></li>
-<li><p><a class="reference external" href="mailto:bob&#46;capella&#37;&#52;&#48;gmail&#46;com">bob<span>&#46;</span>capella<span>&#64;</span>gmail<span>&#46;</span>com</a></p></li>
-<li><p><a class="reference external" href="https://twitter.com/minusthebob">https://twitter.com/minusthebob</a></p></li>
+<li><p>Robert Capella 🌪️</p></li>
+<li><p><a class="reference external" href="mailto:bob&#46;capella&#37;&#52;&#48;gmail&#46;com">bob<span>&#46;</span>capella<span>&#64;</span>gmail<span>&#46;</span>com</a> 🌩️</p></li>
+<li><p><a class="reference external" href="https://twitter.com/minusthebob">https://twitter.com/minusthebob</a> 🌨️</p></li>
 </ul>
 </div></blockquote>
+<p>Questions, comments, and feedback are certainly welcome. This project is a personal exercise
+in learning how to publish packages to Github &amp; PyPI, so excuse the excessive documentation for
+one function 😄.</p>
 </section>
 <section id="future-work">
 <h2>Future Work<a class="headerlink" href="#future-work" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><p>if useful, incorporate into MetPy</p></li>
-<li><p>provide .nc, .csv, &amp; aws support</p></li>
-<li><p>provide just-in-time compiling support for faster 2D work</p></li>
+<li><p>provide cli .nc, .csv, &amp; aws support</p></li>
 </ul>
 </div></blockquote>
+</section>
+<section id="disclaimer">
+<h2>Disclaimer<a class="headerlink" href="#disclaimer" title="Permalink to this heading"></a></h2>
+<p>There is a ~10% difference in ECAPE between calc_ecape and Peters’ published matlab scripts.
+This is primarily due to a difference in calculated CAPE. The tests describe other sources of error.</p>
+<dl class="simple">
+<dt>Since:</dt><dd><ul class="simple">
+<li><p>the methods here are within ~1% of Peters’ calculations when CAPE is equivalent in the sample data</p></li>
+<li><p>Peters et. al. specifically mention MetPy for determining CAPE</p></li>
+<li><p>MetPy is a reliable, open-source, and frequently used meteorological calculation package</p></li>
+</ul>
+</dd>
+</dl>
+<p>MetPy’s CAPE calculations were chosen for ease of readability and implementation.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
@@ -128,7 +156,7 @@ The module leans heavily on Metpy [<span id="id3">May <em>et al.</em> [<a class=
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ecape_py.html" class="btn btn-neutral float-right" title="ecape_py package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ecape.html" class="btn btn-neutral float-right" title="calcs package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

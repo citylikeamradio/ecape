@@ -5,7 +5,7 @@ from metpy.calc import dewpoint_from_specific_humidity, most_unstable_parcel
 from metpy.units import units
 from pytest import approx
 
-from src.ecape_py.ecape import (
+from src.ecape.calc import (
     calc_ecape,
     calc_ecape_a,
     calc_el_height,
@@ -17,7 +17,18 @@ from src.ecape_py.ecape import (
     calc_sr_wind,
 )
 
-"""w/in 1% of authors calculations, given errors described below, when mucape is equivalent"""
+"""
+Note:
+There is a ~10% difference in ECAPE between calc_ecape and Peters' published matlab scripts.
+This is primarily due to a difference in calculated CAPE. The tests below describe other sources of error.
+
+Since:
+ - the methods here are within ~1% of Peters' calculations when CAPE is equivalent in the sample data
+ - Peters et. al. specifically mention MetPy for determining CAPE
+ - MetPy is a reliable, open-source, and frequently used meteorological calculation package
+ 
+MetPy's CAPE calculations were chosen for ease of readability and implementation.
+ """
 
 def sample_data():
     """
