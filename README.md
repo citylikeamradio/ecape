@@ -1,7 +1,7 @@
 # ecape
 
 ecape is a simple module that contains an entraining CAPE, or ECAPE, calculation described by Peters et. al. 2023.
-Additionally, Peters et. al. 2023 -provided MatLab scripts serve as a reference and test verification data.
+Additionally, Peters-provided MatLab scripts serve as a reference and test verification data.
 The module leans heavily on Metpy for meteorological calculations.
 
 [![PyPI - Version](https://img.shields.io/pypi/v/ecape.svg)](https://pypi.org/project/ecape)
