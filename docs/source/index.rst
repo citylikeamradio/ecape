@@ -1,4 +1,4 @@
-.. ecape-py documentation master file, created by
+.. ecape documentation master file, created by
    sphinx-quickstart on Sat Jun  3 23:46:52 2023.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -11,21 +11,21 @@
    home <self>
    ecape_py <ecape_py>
 
-ecape-py
+ecape
 ====================
 
-ecape-py is a simple module that contains an entraining CAPE, or ECAPE, calculation described by :cite:t:`peters2023analytic`.
+ecape is a simple module that contains an entraining CAPE, or ECAPE, calculation described by :cite:t:`peters2023analytic`.
 Additionally, :cite:t:`Peters2023` -provided MatLab scripts serve as a reference and test verification data.
 The module leans heavily on Metpy [:cite:t:`metpy`] for meteorological calculations.
 
 Installation
 --------------
 
-To use ecape-py, install it with pip:
+To use ecape, install it with pip:
 
 .. code-block:: console
 
-    pip install ecape-py
+    pip install ecape
 
 
 Contact

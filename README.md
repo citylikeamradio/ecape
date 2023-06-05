@@ -1,23 +1,23 @@
-# ecape-py
+# ecape
 
-ecape-py is a simple module that contains an entraining CAPE, or ECAPE, calculation described by Peters et. al. 2023.
+ecape is a simple module that contains an entraining CAPE, or ECAPE, calculation described by Peters et. al. 2023.
 Additionally, Peters et. al. 2023 -provided MatLab scripts serve as a reference and test verification data.
 The module leans heavily on Metpy for meteorological calculations.
 
-[![PyPI - Version](https://img.shields.io/pypi/v/ecape-py.svg)](https://pypi.org/project/ecape-py)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ecape-py.svg)](https://pypi.org/project/ecape-py)
+[![PyPI - Version](https://img.shields.io/pypi/v/ecape.svg)](https://pypi.org/project/ecape)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ecape.svg)](https://pypi.org/project/ecape)
 
 Installation
 ------------
 
 ```console
-pip install ecape-py
+pip install ecape
 ```
 
 Documentation, Source
 -------------
-https://github.com/citylikeamradio/ecape-py
-https://citylikeamradio.github.io/ecape-py/html/index.html
+https://github.com/citylikeamradio/ecape
+https://citylikeamradio.github.io/ecape/html/index.html
 
 Contact
 -------------
@@ -42,4 +42,4 @@ John M. Peters, Daniel R. Chavas, Hugh Morrison, Chun-Yian Su, and Brice E. Coff
 Licence
 ------------
 
-`ecape-py` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+`ecape` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.

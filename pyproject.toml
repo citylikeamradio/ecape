@@ -9,7 +9,7 @@ exclude = ["/docs"]
 exclude = ["src/ecape_py"]
 
 [project]
-name = "ecape-py"
+name = "ecape"
 dynamic = ["version"]
 description = 'Calculate the entraining CAPE (ECAPE) of a parcel.'
 readme = "README.md"
@@ -37,9 +37,9 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://citylikeamradio.github.io/ecape-py"
-Issues = "https://github.com/citylikeamradio/ecape-py/issues"
-Source = "https://github.com/citylikeamradio/ecape-py"
+Documentation = "https://citylikeamradio.github.io/ecape"
+Issues = "https://github.com/citylikeamradio/ecape/issues"
+Source = "https://github.com/citylikeamradio/ecape"
 
 [tool.hatch.version]
 path = "src/ecape_py/__about__.py"
@@ -156,8 +156,8 @@ omit = [
 ]
 
 [tool.coverage.paths]
-ecape_py = ["src/ecape_py", "*/ecape-py/src/ecape_py"]
-tests = ["tests", "*/ecape-py/tests"]
+ecape_py = ["src/ecape_py", "*/ecape/src/ecape_py"]
+tests = ["tests", "*/ecape/tests"]
 
 [tool.coverage.report]
 exclude_lines = [

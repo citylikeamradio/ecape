@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'ecape-py'
+project = 'ecape'
 copyright = '2023, Robert Capella'
 author = 'Robert Capella'
 

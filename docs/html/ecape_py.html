@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ecape_py package &mdash; ecape-py  documentation</title>
+  <title>ecape_py package &mdash; ecape  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="ecape-py" href="index.html" /> 
+    <link rel="prev" title="ecape" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,7 +31,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            ecape-py
+            ecape
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -44,18 +44,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">home</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ecape_py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-ecape_py.ecape">ecape_py</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_ecape"><code class="docutils literal notranslate"><span class="pre">calc_ecape()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_ecape_a"><code class="docutils literal notranslate"><span class="pre">calc_ecape_a()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_el_height"><code class="docutils literal notranslate"><span class="pre">calc_el_height()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_integral_arg"><code class="docutils literal notranslate"><span class="pre">calc_integral_arg()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_lfc_height"><code class="docutils literal notranslate"><span class="pre">calc_lfc_height()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_mse"><code class="docutils literal notranslate"><span class="pre">calc_mse()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_ncape"><code class="docutils literal notranslate"><span class="pre">calc_ncape()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_psi"><code class="docutils literal notranslate"><span class="pre">calc_psi()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ecape_py.ecape.calc_sr_wind"><code class="docutils literal notranslate"><span class="pre">calc_sr_wind()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#ecape-py">ecape_py</a></li>
 </ul>
 </li>
 </ul>
@@ -66,7 +55,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">ecape-py</a>
+          <a href="index.html">ecape</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -86,231 +75,8 @@
              
   <section id="ecape-py-package">
 <h1>ecape_py package<a class="headerlink" href="#ecape-py-package" title="Permalink to this heading"></a></h1>
-<section id="module-ecape_py.ecape">
-<span id="ecape-py"></span><h2>ecape_py<a class="headerlink" href="#module-ecape_py.ecape" title="Permalink to this heading"></a></h2>
-<p>Calculate the entraining CAPE (ECAPE) of a parcel</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_ecape">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_ecape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_humidity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_wind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_wind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cape_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'most_unstable'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_ecape" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the entraining CAPE (ECAPE) of a parcel</p>
-<section id="parameters">
-<h3>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
-<blockquote>
-<div><dl class="simple">
-<dt>height:</dt><dd><p>Atmospheric heights at the levels given by ‘pressure’.</p>
-</dd>
-<dt>pressure:</dt><dd><p>Total atmospheric pressure</p>
-</dd>
-<dt>temperature:</dt><dd><p>Air temperature</p>
-</dd>
-<dt>specific humidity:</dt><dd><p>Specific humidity</p>
-</dd>
-<dt>u_wind:</dt><dd><p>X component of the wind</p>
-</dd>
-<dt>v_wind</dt><dd><p>Y component of the wind</p>
-</dd>
-<dt>cape_type:</dt><dd><p>Variation of CAPE desired. ‘most_unstable’ (default), ‘surface_based’, or ‘mixed_layer’</p>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-<section id="returns">
-<h3>Returns:<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h3>
-<blockquote>
-<div><dl class="simple">
-<dt>ecape<span class="classifier">‘pint.Quantity’</span></dt><dd><p>Entraining CAPE</p>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_ecape_a">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_ecape_a</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sr_wind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Quantity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_ecape_a" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the entraining cape of a parcel</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sr_wind</strong> – 0-1 km AGL average storm relative wind magnitude</p></li>
-<li><p><strong>psi</strong> – Parameter defined in eqn. 52, constant for a given equilibrium level</p></li>
-<li><p><strong>ncape</strong> – Buoyancy dilution potential of the free troposphere (eqn. 54)</p></li>
-<li><p><strong>cape</strong> – Convective available potential energy (CAPE, user-defined type)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Entraining CAPE (eqn. 55)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ecape</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_el_height">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_el_height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dew_point_temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parcel_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_el_height" title="Permalink to this definition"></a></dt>
-<dd><p>Retrieve a parcel’s equilibrium level (el).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pressure</strong> – Total atmospheric pressure</p></li>
-<li><p><strong>height</strong> – Atmospheric heights at the levels given by ‘pressure’.</p></li>
-<li><p><strong>temperature</strong> – Air temperature</p></li>
-<li><p><strong>dew_point_temperature</strong> – Dew point temperature</p></li>
-<li><p><strong>parcel_func</strong> – parcel profile retrieval callable via MetPy</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><p>index of the last instance of positive buoyancy below the el
-el_z:</p>
-<blockquote>
-<div><p>height of the last instance of positive buoyancy below the el</p>
-</div></blockquote>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>el_idx</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_integral_arg">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_integral_arg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moist_static_energy_bar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moist_static_energy_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_integral_arg" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the contents of the integral defined in the NCAPE equation (54).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>moist_static_energy_bar</strong> – Mean moist static energy from the surface to a layer</p></li>
-<li><p><strong>moist_static_energy_star</strong> – Saturated moist static energy</p></li>
-<li><p><strong>temperature</strong> – Air temperature</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Contents of integral defined in NCAPE eqn. 54</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>integral_arg</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_lfc_height">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_lfc_height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dew_point_temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parcel_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_lfc_height" title="Permalink to this definition"></a></dt>
-<dd><p>Retrieve a parcel’s level of free convection (lfc).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pressure</strong> – Total atmospheric pressure</p></li>
-<li><p><strong>height</strong> – Atmospheric heights at the levels given by ‘pressure’.</p></li>
-<li><p><strong>temperature</strong> – Air temperature</p></li>
-<li><p><strong>dew_point_temperature</strong> – Dew point temperature</p></li>
-<li><p><strong>parcel_func</strong> – parcel profile retrieval callable via MetPy</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><p>index of the last instance of negative buoyancy below the lfc
-lfc_z:</p>
-<blockquote>
-<div><p>height of the last instance of negative buoyancy below the lfc</p>
-</div></blockquote>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>lfc</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_mse">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_mse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_humidity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_mse" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pressure</strong> – Total atmospheric pressure</p></li>
-<li><p><strong>height</strong> – Atmospheric heights at the levels given by ‘pressure’.</p></li>
-<li><p><strong>temperature</strong> – Air temperature</p></li>
-<li><p><strong>specific_humidity</strong> – Specific humidity</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><p>Mean moist static energy from the surface to a layer
-moist_static_energy_star:</p>
-<blockquote>
-<div><p>Saturated moist static energy</p>
-</div></blockquote>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>moist_static_energy_bar</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_ncape">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_ncape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral_arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lfc_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_ncape" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the buoyancy dilution potential (NCAPE)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>integral_arg</strong> – Contents of integral defined in NCAPE eqn. 54</p></li>
-<li><p><strong>height</strong> – Atmospheric heights at the levels given by ‘pressure’.</p></li>
-<li><p><strong>lfc_idx</strong> – Index of the last instance of negative buoyancy below the lfc</p></li>
-<li><p><strong>el_idx</strong> – Index of the last instance of positive buoyancy below the el</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Buoyancy dilution potential of the free troposphere (eqn. 54)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ncape</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_psi">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_psi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">el_z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Quantity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_psi" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the constant psi as denoted in eqn. 52</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>el_z</strong> – height of the last instance of positive buoyancy below the el</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Parameter defined in eqn. 52, constant for a given equilibrium level, see COMPUTE_ECAPE.m L88 (pitchfork)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>psi</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ecape_py.ecape.calc_sr_wind">
-<span class="sig-prename descclassname"><span class="pre">ecape_py.ecape.</span></span><span class="sig-name descname"><span class="pre">calc_sr_wind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_wind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_wind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Quantity</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="headerlink" href="#ecape_py.ecape.calc_sr_wind" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the mean storm relative (as compared to Bunkers right motion) wind magnitude in the 0-1 km AGL layer</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pressure</strong> – Total atmospheric pressure</p></li>
-<li><p><strong>u_wind</strong> – X component of the wind</p></li>
-<li><p><strong>v_wind</strong> – Y component of the wind</p></li>
-<li><p><strong>height</strong> – Atmospheric heights at the levels given by ‘pressure’.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>0-1 km AGL average storm relative wind magnitude</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>sr_wind</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="ecape-py">
+<h2>ecape_py<a class="headerlink" href="#ecape-py" title="Permalink to this heading"></a></h2>
 </section>
 </section>
 
@@ -318,7 +84,7 @@ moist_static_energy_star:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="ecape-py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="ecape" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
