@@ -40,6 +40,7 @@ in learning how to publish packages to Github & PyPI, so excuse the excessive do
 one function.
 
 ### Future Work
+ - add support for other water content variables
  - if useful, incorporate into MetPy
  - provide cli .nc, .csv, & aws support
 
@@ -53,6 +54,8 @@ Since:
  - MetPy is a reliable, open-source, and frequently used meteorological calculation package
 
 MetPy's CAPE calculations were chosen for ease of readability and implementation.
+
+If users prefer their own CAPE calculations, use the `manual_cape` parameter to override this decision!
 
 ### References
 Ryan M. May, Sean C. Arms, Patrick Marsh, Eric Bruning, John R. Leeman, Kevin Goebbert, Jonathan E. Thielen, Zachary S Bruick, and M. Drew. Camron. Metpy: a Python package for meteorological data. 2023. URL: Unidata/MetPy, doi:10.5065/D6WW7G29.

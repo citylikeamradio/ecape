@@ -26,7 +26,7 @@ Since:
  - the methods here are within ~1% of Peters' calculations when CAPE is equivalent in the sample data
  - Peters et. al. specifically mention MetPy for determining CAPE
  - MetPy is a reliable, open-source, and frequently used meteorological calculation package
- 
+
 MetPy's CAPE calculations were chosen for ease of readability and implementation.
  """
 
@@ -59,11 +59,28 @@ def test_end_to_end_ecape():
 
     height, pressure, temperature, specific_humidity, u_wind, v_wind, dew_point_temperature = sample_data()
 
-    for cape_type in ['most_unstable', 'surface_based', 'mixed_layer']:
+    for cape_type in ["most_unstable", "surface_based", "mixed_layer"]:
         ecape = calc_ecape(height, pressure, temperature, specific_humidity, u_wind, v_wind, cape_type)
         print(f"{cape_type}: {ecape}")
 
     assert ecape
+
+
+def test_manual_ecape():
+    """
+    values via author's published matlab scripts (sigma = 1.6)
+    https://figshare.com/articles/software/ECAPE_scripts/21859818
+    """
+
+    height, pressure, temperature, specific_humidity, u_wind, v_wind, dew_point_temperature = sample_data()
+
+    manual_cape = 3.530029673046427e03 * units("J/kg")
+    cape_type = "most_unstable"
+
+    ecape = calc_ecape(height, pressure, temperature, specific_humidity, u_wind, v_wind, cape_type, manual_cape)
+
+    assert ecape.magnitude == approx(3.343908138651551e03, rel=0.01)
+
 
 
 def test_calc_psi():
@@ -84,10 +101,10 @@ def test_calc_ecape_a():
     https://figshare.com/articles/software/ECAPE_scripts/21859818
     """
 
-    sr_wind = 16.662798431352986 * units('m/s')
-    psi = 0.003401863644631 * units('dimensionless')
-    ncape = 7.604878130037112e02 * units('m**2/s**2')
-    cape = 3.530029673046427e03 * units('J/kg')
+    sr_wind = 16.662798431352986 * units("m/s")
+    psi = 0.003401863644631 * units("dimensionless")
+    ncape = 7.604878130037112e02 * units("m**2/s**2")
+    cape = 3.530029673046427e03 * units("J/kg")
 
     ecape_a = calc_ecape_a(sr_wind, psi, ncape, cape)
     assert ecape_a.magnitude == approx(3.343908138651551e03 , rel=0.0001)
@@ -103,7 +120,7 @@ def test_calc_integral_arg():
     data = np.genfromtxt(intarg_loc, delimiter=",")
     mseo_bar = data[:, 0] * units("J/kg")
     mseo_star = data[:, 1] * units("J/kg")
-    t0 = data[:, 2] * units('K')
+    t0 = data[:, 2] * units("K")
     int_arg = data[:, 3]
 
     integral_arg = calc_integral_arg(mseo_bar, mseo_star, t0)
@@ -120,8 +137,8 @@ def test_calc_ncape():
 
     ncape_loc = Path("./ncape.txt")
     data = np.genfromtxt(ncape_loc, delimiter=",")
-    integral_arg = data[:, 0] * units('m/s**2')
-    height = data[:, 1] * units('m')
+    integral_arg = data[:, 0] * units("m/s**2")
+    height = data[:, 1] * units("m")
     lfc_idx = 16
     el_idx = 117
 
@@ -139,8 +156,8 @@ def test_calc_mse():
 
     mseo_loc = Path("./mseo.txt")
     data = np.genfromtxt(mseo_loc, delimiter=",")
-    mse0_bar = data[:, 1] * units('J/kg')
-    mse0_star = data[:, 2] * units('J/kg')
+    mse0_bar = data[:, 1] * units("J/kg")
+    mse0_star = data[:, 2] * units("J/kg")
 
     mseo_bar_sounding, mseo_star_sounding = calc_mse(pressure, height, temperature, specific_humidity)
 
