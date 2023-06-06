@@ -78,7 +78,6 @@ def test_manual_ecape():
     cape_type = "most_unstable"
 
     ecape = calc_ecape(height, pressure, temperature, specific_humidity, u_wind, v_wind, cape_type, manual_cape)
-
     assert ecape.magnitude == approx(3.343908138651551e03, rel=0.01)
 
 

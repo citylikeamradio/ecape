@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example &mdash; ecape  documentation</title>
+  <title>examples &mdash; ecape  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -44,7 +44,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">home</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ecape.html">ecape</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">examples</a></li>
 </ul>
 
         </div>
@@ -61,7 +61,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">example</li>
+      <li class="breadcrumb-item active">examples</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/example.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -71,12 +71,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="example">
-<span id="id1"></span><h1>example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h1>
+  <section id="examples">
+<span id="example"></span><h1>examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h1>
 <p>For use in a script:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ecape.calc</span> <span class="kn">import</span> <span class="n">calc_ecape</span>
 
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">metpy.units</span> <span class="kn">import</span> <span class="n">units</span>
 
@@ -94,6 +95,73 @@
 
 <span class="n">ecape</span> <span class="o">=</span> <span class="n">calc_ecape</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">specific_humidity</span><span class="p">,</span> <span class="n">u_wind</span><span class="p">,</span> <span class="n">v_wind</span><span class="p">,</span> <span class="n">cape_type</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cape_type</span><span class="si">}</span><span class="s2"> ECAPE: </span><span class="si">{</span><span class="n">ecape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>University of Wyoming soundings (trim below ground rows):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">metpy.calc</span> <span class="k">as</span> <span class="nn">mpcalc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">metpy.units</span> <span class="kn">import</span> <span class="n">pandas_dataframe_to_unit_arrays</span><span class="p">,</span> <span class="n">units</span>
+
+<span class="kn">from</span> <span class="nn">ecape.calc</span> <span class="kn">import</span> <span class="n">calc_ecape</span>
+
+<span class="n">unit_dictionary</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;hPa&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># degC throws an error</span>
+    <span class="s2">&quot;dew_point&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># degC throws an error</span>
+    <span class="s2">&quot;relative_humidity&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;dimensionless&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;mixing_ratio&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;g/kg&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;direction&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;degree&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;speed&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;knot&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;K&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;theta_e&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;K&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;theta_v&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;K&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">sounding_loc</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/UWyo_Sounding.csv&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">sounding_loc</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="n">unit_dictionary</span><span class="o">.</span><span class="n">keys</span><span class="p">()],</span>
+<span class="p">)</span>
+
+<span class="c1"># MetPy provides a useful solution to incorporating pint units and pd.DataFrames</span>
+<span class="n">unit_array</span> <span class="o">=</span> <span class="n">pandas_dataframe_to_unit_arrays</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">unit_dictionary</span><span class="p">)</span>
+
+<span class="c1"># fix a degC issue</span>
+<span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;degC&quot;</span><span class="p">)</span>
+<span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;dew_point&quot;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">units</span><span class="p">(</span><span class="s2">&quot;degC&quot;</span><span class="p">)</span>
+
+<span class="c1"># perform conversions.. fix provided in a future release</span>
+<span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">],</span> <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mpcalc</span><span class="o">.</span><span class="n">wind_components</span><span class="p">(</span><span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">],</span> <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">])</span>
+<span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;specific_humidity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mpcalc</span><span class="o">.</span><span class="n">specific_humidity_from_dewpoint</span><span class="p">(</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">],</span> <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;dew_point&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># let&#39;s say the SPC MUCAPE calculation is 10% higher than MetPy&#39;s..</span>
+<span class="c1"># and we happen to be hopeful chasers</span>
+<span class="n">metpy_mucape</span> <span class="o">=</span> <span class="n">mpcalc</span><span class="o">.</span><span class="n">most_unstable_cape_cin</span><span class="p">(</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">],</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;dew_point&quot;</span><span class="p">]</span>
+<span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">spc_cape</span> <span class="o">=</span> <span class="n">metpy_mucape</span> <span class="o">*</span> <span class="mf">1.10</span>
+
+<span class="n">ecape</span> <span class="o">=</span> <span class="n">calc_ecape</span><span class="p">(</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">],</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;specific_humidity&quot;</span><span class="p">],</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">],</span>
+    <span class="n">unit_array</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">],</span>
+    <span class="n">cape_type</span><span class="o">=</span><span class="s2">&quot;most_unstable&quot;</span><span class="p">,</span>
+    <span class="n">manual_cape</span><span class="o">=</span><span class="n">spc_cape</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mucape: </span><span class="si">{</span><span class="n">mucape</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">ecape:  </span><span class="si">{</span><span class="n">ecape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>

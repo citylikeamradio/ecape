@@ -48,7 +48,7 @@ def _get_parcel_profile(
 
 @check_units("[pressure]", "[length]", "[temperature]", "[temperature]")
 def calc_lfc_height(
-    pressure: PintList, height: PintList, temperature: PintList, dew_point_temperature: PintList, parcel_func: Callable
+    pressure: PintList, height_msl: PintList, temperature: PintList, dew_point_temperature: PintList, parcel_func: Callable
 ) -> Tuple[int, pint.Quantity]:
     """
     Retrieve a parcel's level of free convection (lfc).
@@ -56,7 +56,7 @@ def calc_lfc_height(
     Args:
         pressure:
             Total atmospheric pressure
-        height:
+        height_msl:
             Atmospheric heights at the levels given by 'pressure'.
         temperature:
             Air temperature
@@ -79,14 +79,14 @@ def calc_lfc_height(
     # calculate the lfc, select the appropriate index & associated height
     lfc_p, lfc_t = mpcalc.lfc(pressure, temperature, dew_point_temperature, parcel_temperature_profile=parcel_profile)
     lfc_idx = (pressure - lfc_p > 0).nonzero()[0][-1]
-    lfc_z = height[lfc_idx]
+    lfc_z = height_msl[lfc_idx]
 
     return lfc_idx, lfc_z
 
 
 @check_units("[pressure]", "[length]", "[temperature]", "[temperature]")
 def calc_el_height(
-    pressure: PintList, height: PintList, temperature: PintList, dew_point_temperature: PintList, parcel_func: Callable
+    pressure: PintList, height_msl: PintList, temperature: PintList, dew_point_temperature: PintList, parcel_func: Callable
 ) -> Tuple[int, pint.Quantity]:
     """
     Retrieve a parcel's equilibrium level (el).
@@ -94,7 +94,7 @@ def calc_el_height(
     Args:
         pressure:
             Total atmospheric pressure
-        height:
+        height_msl:
             Atmospheric heights at the levels given by 'pressure'.
         temperature:
             Air temperature
@@ -117,13 +117,13 @@ def calc_el_height(
     # calculate the el, select the appropriate index & associated height
     el_p, el_t = mpcalc.el(pressure, temperature, dew_point_temperature, parcel_temperature_profile=parcel_profile)
     el_idx = (pressure - el_p > 0).nonzero()[0][-1]
-    el_z = height[el_idx]
+    el_z = height_msl[el_idx]
 
     return el_idx, el_z
 
 
 @check_units("[pressure]", "[speed]", "[speed]", "[length]")
-def calc_sr_wind(pressure: PintList, u_wind: PintList, v_wind: PintList, height: PintList) -> pint.Quantity:
+def calc_sr_wind(pressure: PintList, u_wind: PintList, v_wind: PintList, height_msl: PintList) -> pint.Quantity:
     """
     Calculate the mean storm relative (as compared to Bunkers right motion) wind magnitude in the 0-1 km AGL layer
 
@@ -134,7 +134,7 @@ def calc_sr_wind(pressure: PintList, u_wind: PintList, v_wind: PintList, height:
             X component of the wind
         v_wind
             Y component of the wind
-        height:
+        height_msl:
             Atmospheric heights at the levels given by 'pressure'.
 
     Returns:
@@ -142,14 +142,14 @@ def calc_sr_wind(pressure: PintList, u_wind: PintList, v_wind: PintList, height:
             0-1 km AGL average storm relative wind magnitude
 
     """
-
-    bunkers_right, _, _ = mpcalc.bunkers_storm_motion(pressure, u_wind, v_wind, height)  # right, left, mean
+    height_agl = height_msl - height_msl[0]
+    bunkers_right, _, _ = mpcalc.bunkers_storm_motion(pressure, u_wind, v_wind, height_agl)  # right, left, mean
 
     u_sr = u_wind - bunkers_right[0]  # u-component
     v_sr = v_wind - bunkers_right[1]  # v-component
 
-    u_sr_1km = u_sr[np.nonzero(height <= 1000 * units("m"))]
-    v_sr_1km = v_sr[np.nonzero(height <= 1000 * units("m"))]
+    u_sr_1km = u_sr[np.nonzero((height_agl >= 0 * units("m")) & (height_agl <= 1000 * units("m")))]
+    v_sr_1km = v_sr[np.nonzero((height_agl >= 0 * units("m")) & (height_agl <= 1000 * units("m")))]
 
     sr_wind = np.mean(mpcalc.wind_speed(u_sr_1km, v_sr_1km))
 
@@ -158,7 +158,7 @@ def calc_sr_wind(pressure: PintList, u_wind: PintList, v_wind: PintList, height:
 
 @check_units("[pressure]", "[length]", "[temperature]", "[mass]/[mass]")
 def calc_mse(
-    pressure: PintList, height: PintList, temperature: PintList, specific_humidity: PintList
+    pressure: PintList, height_msl: PintList, temperature: PintList, specific_humidity: PintList
 ) -> Tuple[PintList, PintList]:
     """
     Calculate the moist static energy terms of interest.
@@ -166,7 +166,7 @@ def calc_mse(
     Args:
         pressure:
             Total atmospheric pressure
-        height:
+        height_msl:
             Atmospheric heights at the levels given by 'pressure'.
         temperature:
             Air temperature
@@ -181,13 +181,13 @@ def calc_mse(
     """
 
     # calculate MSE_bar
-    moist_static_energy = mpcalc.moist_static_energy(height, temperature, specific_humidity)
+    moist_static_energy = mpcalc.moist_static_energy(height_msl, temperature, specific_humidity)
     moist_static_energy_bar = np.cumsum(moist_static_energy) / np.arange(1, len(moist_static_energy) + 1)
     moist_static_energy_bar = moist_static_energy_bar.to("J/kg")
 
     # calculate MSE*
     saturation_mixing_ratio = mpcalc.saturation_mixing_ratio(pressure, temperature)
-    moist_static_energy_star = mpcalc.moist_static_energy(height, temperature, saturation_mixing_ratio)
+    moist_static_energy_star = mpcalc.moist_static_energy(height_msl, temperature, saturation_mixing_ratio)
     moist_static_energy_star = moist_static_energy_star.to("J/kg")
 
     return moist_static_energy_bar, moist_static_energy_star
@@ -221,14 +221,14 @@ def calc_integral_arg(moist_static_energy_bar, moist_static_energy_star, tempera
 
 
 @check_units("[length]/[time]**2", "[length]", "[dimensionless]", "[dimensionless]")
-def calc_ncape(integral_arg: PintList, height: PintList, lfc_idx: int, el_idx: int) -> pint.Quantity:
+def calc_ncape(integral_arg: PintList, height_msl: PintList, lfc_idx: int, el_idx: int) -> pint.Quantity:
     """
     Calculate the buoyancy dilution potential (NCAPE)
 
     Args:
         integral_arg:
             Contents of integral defined in NCAPE eqn. 54
-        height:
+        height_msl:
             Atmospheric heights at the levels given by 'pressure'.
         lfc_idx:
             Index of the last instance of negative buoyancy below the lfc
@@ -243,7 +243,7 @@ def calc_ncape(integral_arg: PintList, height: PintList, lfc_idx: int, el_idx: i
     # see compute_NCAPE.m L41
     ncape = np.sum(
         (0.5 * integral_arg[lfc_idx:el_idx] + 0.5 * integral_arg[lfc_idx + 1 : el_idx + 1])
-        * (height[lfc_idx + 1 : el_idx + 1] - height[lfc_idx:el_idx])
+        * (height_msl[lfc_idx + 1 : el_idx + 1] - height_msl[lfc_idx:el_idx])
     )
 
     return ncape
@@ -309,7 +309,7 @@ def calc_psi(el_z: pint.Quantity) -> pint.Quantity:
 
 @check_units("[length]", "[pressure]", "[temperature]", "[mass]/[mass]", "[speed]", "[speed]")
 def calc_ecape(
-    height: PintList,
+    height_msl: PintList,
     pressure: PintList,
     temperature: PintList,
     specific_humidity: PintList,
@@ -323,8 +323,8 @@ def calc_ecape(
 
     Parameters:
     ------------
-        height: np.ndarray[pint.Quantity]
-            Atmospheric heights at the levels given by 'pressure'.
+        height_msl: np.ndarray[pint.Quantity]
+            Atmospheric heights at the levels given by 'pressure' (MSL)
         pressure: np.ndarray[pint.Quantity]
             Total atmospheric pressure
         temperature: np.ndarray[pint.Quantity]
@@ -361,22 +361,23 @@ def calc_ecape(
     # calculate cape
     dew_point_temperature = mpcalc.dewpoint_from_specific_humidity(pressure, temperature, specific_humidity)
 
+    # whether the user has not / has overidden the cape calculations
     if not manual_cape:
         cape, _ = cape_func[cape_type](pressure, temperature, dew_point_temperature)
     else:
         cape = manual_cape
 
     # calculate the level of free convection (lfc) and equilibrium level (el) indexes
-    lfc_idx, _ = calc_lfc_height(pressure, height, temperature, dew_point_temperature, parcel_func[cape_type])
-    el_idx, el_z = calc_el_height(pressure, height, temperature, dew_point_temperature, parcel_func[cape_type])
+    lfc_idx, _ = calc_lfc_height(pressure, height_msl, temperature, dew_point_temperature, parcel_func[cape_type])
+    el_idx, el_z = calc_el_height(pressure, height_msl, temperature, dew_point_temperature, parcel_func[cape_type])
 
     # calculate the buoyancy dilution potential (ncape)
-    moist_static_energy_bar, moist_static_energy_star = calc_mse(pressure, height, temperature, specific_humidity)
+    moist_static_energy_bar, moist_static_energy_star = calc_mse(pressure, height_msl, temperature, specific_humidity)
     integral_arg = calc_integral_arg(moist_static_energy_bar, moist_static_energy_star, temperature)
-    ncape = calc_ncape(integral_arg, height, lfc_idx, el_idx)
+    ncape = calc_ncape(integral_arg, height_msl, lfc_idx, el_idx)
 
     # calculate the storm relative (sr) wind
-    sr_wind = calc_sr_wind(pressure, u_wind, v_wind, height)
+    sr_wind = calc_sr_wind(pressure, u_wind, v_wind, height_msl)
 
     # calculate the entraining cape (ecape)
     psi = calc_psi(el_z)

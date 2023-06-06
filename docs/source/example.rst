@@ -1,6 +1,6 @@
 .. _example:
 
-example
+examples
 --------------
 
 For use in a script:
@@ -10,6 +10,7 @@ For use in a script:
     from ecape.calc import calc_ecape
 
     from pathlib import Path
+
     import numpy as np
     from metpy.units import units
 
@@ -27,3 +28,73 @@ For use in a script:
 
     ecape = calc_ecape(height, pressure, temperature, specific_humidity, u_wind, v_wind, cape_type)
     print(f"{cape_type} ECAPE: {ecape}")
+
+
+University of Wyoming soundings (trim below ground rows):
+
+.. code-block:: python
+
+    from pathlib import Path
+
+    import metpy.calc as mpcalc
+    import pandas as pd
+    from metpy.units import pandas_dataframe_to_unit_arrays, units
+
+    from ecape.calc import calc_ecape
+
+    unit_dictionary = {
+        "pressure": units("hPa"),
+        "height": units("m"),
+        "temperature": None,  # degC throws an error
+        "dew_point": None,  # degC throws an error
+        "relative_humidity": units("dimensionless"),
+        "mixing_ratio": units("g/kg"),
+        "direction": units("degree"),
+        "speed": units("knot"),
+        "theta": units("K"),
+        "theta_e": units("K"),
+        "theta_v": units("K"),
+    }
+
+    sounding_loc = Path("/path/to/UWyo_Sounding.csv")
+
+    df = pd.read_csv(
+        sounding_loc,
+        header=None,
+        names=[unit_dictionary.keys()],
+    )
+
+    # MetPy provides a useful solution to incorporating pint units and pd.DataFrames
+    unit_array = pandas_dataframe_to_unit_arrays(df.dropna(), unit_dictionary)
+
+    # fix a degC issue
+    unit_array["temperature"] *= units("degC")
+    unit_array["dew_point"] *= units("degC")
+
+    # perform conversions.. fix provided in a future release
+    unit_array["u"], unit_array["v"] = mpcalc.wind_components(unit_array["speed"], unit_array["direction"])
+    unit_array["specific_humidity"] = mpcalc.specific_humidity_from_dewpoint(
+        unit_array["pressure"], unit_array["dew_point"]
+    )
+
+    # let's say the SPC MUCAPE calculation is 10% higher than MetPy's..
+    # and we happen to be hopeful chasers
+    metpy_mucape = mpcalc.most_unstable_cape_cin(
+        unit_array["pressure"],
+        unit_array["temperature"],
+        unit_array["dew_point"]
+    )[0]
+    spc_cape = metpy_mucape * 1.10
+
+    ecape = calc_ecape(
+        unit_array["height"],
+        unit_array["pressure"],
+        unit_array["temperature"],
+        unit_array["specific_humidity"],
+        unit_array["u"],
+        unit_array["v"],
+        cape_type="most_unstable",
+        manual_cape=spc_cape,
+    )
+
+    print(f"mucape: {spc_cape} \necape:  {ecape}")
