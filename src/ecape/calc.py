@@ -335,7 +335,7 @@ def calc_ecape(
             X component of the wind
         v_wind np.ndarray[pint.Quantity]
             Y component of the wind
-        cape_type: np.ndarray[pint.Quantity]
+        cape_type: str
             Variation of CAPE desired. 'most_unstable' (default), 'surface_based', or 'mixed_layer'
         undiluted_cape: pint.Quantity
             User-provided undiluted CAPE value

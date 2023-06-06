@@ -19,16 +19,19 @@ from src.ecape.calc import (
 
 """
 Note:
-There is a ~10% difference in ECAPE between calc_ecape and Peters' published matlab scripts.
-This is primarily due to a difference in calculated CAPE. The tests below describe other sources of error.
+**If users prefer their own CAPE calculations, use the undiluted_cape parameter:**
 
-Since:
- - the methods here are within ~1% of Peters' calculations when CAPE is equivalent in the sample data
- - Peters et. al. specifically mention MetPy for determining CAPE
+When comparing calc_ecape.py & COMPUTE_ECAPE.m run on Peters2023 sample data,
+there is a ~10% difference in the resultant ECAPE. This is almost entirely due to a difference in calculated MUCAPE.
+The tests describe other sources of variation (~1%).
+
+Given:
+ - the methods here are within ~1% of Peters' calculations when undiluted CAPE is equivalent
+ - Peters et. al. specifically mention MetPy for determining undiluted CAPE
  - MetPy is a reliable, open-source, and frequently used meteorological calculation package
 
-MetPy's CAPE calculations were chosen for ease of readability and implementation.
- """
+MetPy's undiluted CAPE calculations were chosen for ease of readability and implementation.
+"""
 
 def sample_data():
     """

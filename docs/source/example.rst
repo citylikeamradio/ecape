@@ -77,7 +77,7 @@ University of Wyoming soundings (trim below ground rows):
         unit_array["pressure"], unit_array["dew_point"]
     )
 
-    # let's say the SPC MUCAPE calculation is 10% higher than MetPy's..
+    # let's say, in this case, the SPC MUCAPE calculation is 10% higher than MetPy's..
     # and we happen to be hopeful chasers
     metpy_mucape = mpcalc.most_unstable_cape_cin(
         unit_array["pressure"],
@@ -94,7 +94,7 @@ University of Wyoming soundings (trim below ground rows):
         unit_array["u"],
         unit_array["v"],
         cape_type="most_unstable",
-        manual_cape=spc_cape,
+        undiluted_cape=spc_cape,
     )
 
     print(f"mucape: {spc_cape} \necape:  {ecape}")

@@ -75,9 +75,9 @@
 </div>
 <section id="ecape">
 <h1>ecape<a class="headerlink" href="#ecape" title="Permalink to this heading"></a></h1>
-<p>ecape is a simple module that contains an entraining CAPE, or ECAPE, calculation described by <span id="id1">Peters <em>et al.</em> [<a class="reference internal" href="#id5" title="John M. Peters, Daniel R. Chavas, Hugh Morrison, Chun-Yian Su, and Brice E. Coffer. An analytic formula for entraining cape in mid-latitude storm environments. 2023. arXiv:2301.04712.">PCM+23</a>]</span>.
-<span id="id2">Peters [<a class="reference internal" href="#id6" title="John Peters. ECAPE scripts. 2 2023. URL: https://figshare.com/articles/software/ECAPE_scripts/21859818, doi:10.6084/m9.figshare.21859818.v4.">Pet23</a>]</span>-provided MatLab scripts serve as a reference and test verification data.
-The module leans heavily on MetPy [<span id="id3">May <em>et al.</em> [<a class="reference internal" href="#id7" title="Ryan M. May, Sean C. Arms, Patrick Marsh, Eric Bruning, John R. Leeman, Kevin Goebbert, Jonathan E. Thielen, Zachary S Bruick, and M. Drew. Camron. Metpy: a Python package for meteorological data. 2023. URL: Unidata/MetPy, doi:10.5065/D6WW7G29.">MAM+23</a>]</span>] for meteorological calculations.</p>
+<p>ecape is a simple module that contains an entraining CAPE, or ECAPE, calculation described by <span id="id1">Peters <em>et al.</em> [<a class="reference internal" href="#id6" title="John M. Peters, Daniel R. Chavas, Hugh Morrison, Chun-Yian Su, and Brice E. Coffer. An analytic formula for entraining cape in mid-latitude storm environments. 2023. arXiv:2301.04712.">PCM+23</a>]</span>.
+<span id="id2">Peters [<a class="reference internal" href="#id7" title="John Peters. ECAPE scripts. 2 2023. URL: https://figshare.com/articles/software/ECAPE_scripts/21859818, doi:10.6084/m9.figshare.21859818.v4.">Pet23</a>]</span>-provided MatLab scripts serve as a reference and test verification data.
+The module leans heavily on MetPy [<span id="id3">May <em>et al.</em> [<a class="reference internal" href="#id8" title="Ryan M. May, Sean C. Arms, Patrick Marsh, Eric Bruning, John R. Leeman, Kevin Goebbert, Jonathan E. Thielen, Zachary S Bruick, and M. Drew. Camron. Metpy: a Python package for meteorological data. 2023. URL: Unidata/MetPy, doi:10.5065/D6WW7G29.">MAM+23</a>]</span>] for meteorological calculations.</p>
 <p>Package published via <a class="reference external" href="https://hatch.pypa.io/latest/">Hatch</a>.</p>
 <section id="installation-use">
 <h2>Installation &amp; Use<a class="headerlink" href="#installation-use" title="Permalink to this heading"></a></h2>
@@ -119,33 +119,35 @@ one function 😄.</p>
 </ul>
 </div></blockquote>
 </section>
-<section id="disclaimer">
-<h2>Disclaimer<a class="headerlink" href="#disclaimer" title="Permalink to this heading"></a></h2>
-<p><strong>If users prefer their own CAPE calculations, use the *undiluted_cape* parameter to override this decision:</strong></p>
-<p>There is a ~10% difference in ECAPE between calc_ecape and Peters’ published matlab scripts.
-This is primarily due to a difference in calculated CAPE. The tests describe other sources of error (~1%).</p>
+<section id="a-note-on-undiluted-cape-calculation-accuracy">
+<h2>A note on undiluted CAPE &amp; calculation accuracy<a class="headerlink" href="#a-note-on-undiluted-cape-calculation-accuracy" title="Permalink to this heading"></a></h2>
+<p><strong>If users prefer their own CAPE calculations, use the undiluted_cape parameter:</strong></p>
+<p>When comparing calc_ecape.py &amp; COMPUTE_ECAPE.m run on <span id="id4">Peters [<a class="reference internal" href="#id7" title="John Peters. ECAPE scripts. 2 2023. URL: https://figshare.com/articles/software/ECAPE_scripts/21859818, doi:10.6084/m9.figshare.21859818.v4.">Pet23</a>]</span> sample data,
+there is a ~10% difference in the resultant ECAPE. This is almost entirely due to a difference in calculated MUCAPE.
+The tests describe other sources of variation (~1%).</p>
 <dl class="simple">
-<dt>Since:</dt><dd><ul class="simple">
-<li><p>the methods here are within ~1% of Peters’ calculations when CAPE is equivalent in the sample data</p></li>
-<li><p>Peters et. al. specifically mention MetPy for determining CAPE</p></li>
+<dt>Given:</dt><dd><ul class="simple">
+<li><p>the methods here are within ~1% of Peters’ calculations when undiluted CAPE is equivalent</p></li>
+<li><p>Peters et. al. specifically mention MetPy for determining undiluted CAPE</p></li>
 <li><p>MetPy is a reliable, open-source, and frequently used meteorological calculation package</p></li>
 </ul>
 </dd>
 </dl>
-<p>MetPy’s CAPE calculations were chosen for ease of readability and implementation.</p>
+<p>MetPy’s undiluted CAPE calculations were chosen for ease of readability and implementation.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
-<div class="docutils container" id="id4">
-<div class="citation" id="id7" role="doc-biblioentry">
+<div class="docutils container" id="id5">
+<div class="citation" id="id8" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">MAM+23</a><span class="fn-bracket">]</span></span>
 <p>Ryan M. May, Sean C. Arms, Patrick Marsh, Eric Bruning, John R. Leeman, Kevin Goebbert, Jonathan E. Thielen, Zachary S Bruick, and M. Drew. Camron. Metpy: a Python package for meteorological data. 2023. URL: <a class="reference external" href="Unidata/MetPy">Unidata/MetPy</a>, <a class="reference external" href="https://doi.org/10.5065/D6WW7G29">doi:10.5065/D6WW7G29</a>.</p>
 </div>
-<div class="citation" id="id6" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">Pet23</a><span class="fn-bracket">]</span></span>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Pet23<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
 <p>John Peters. ECAPE scripts. 2 2023. URL: <a class="reference external" href="https://figshare.com/articles/software/ECAPE_scripts/21859818">https://figshare.com/articles/software/ECAPE_scripts/21859818</a>, <a class="reference external" href="https://doi.org/10.6084/m9.figshare.21859818.v4">doi:10.6084/m9.figshare.21859818.v4</a>.</p>
 </div>
-<div class="citation" id="id5" role="doc-biblioentry">
+<div class="citation" id="id6" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">PCM+23</a><span class="fn-bracket">]</span></span>
 <p>John M. Peters, Daniel R. Chavas, Hugh Morrison, Chun-Yian Su, and Brice E. Coffer. An analytic formula for entraining cape in mid-latitude storm environments. 2023. <a class="reference external" href="https://arxiv.org/abs/2301.04712">arXiv:2301.04712</a>.</p>
 </div>
