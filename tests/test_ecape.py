@@ -66,7 +66,7 @@ def test_end_to_end_ecape():
     assert ecape
 
 
-def test_manual_ecape():
+def test_undiluted_ecape():
     """
     values via author's published matlab scripts (sigma = 1.6)
     https://figshare.com/articles/software/ECAPE_scripts/21859818
@@ -74,10 +74,10 @@ def test_manual_ecape():
 
     height, pressure, temperature, specific_humidity, u_wind, v_wind, dew_point_temperature = sample_data()
 
-    manual_cape = 3.530029673046427e03 * units("J/kg")
+    undiluted_cape = 3.530029673046427e03 * units("J/kg")
     cape_type = "most_unstable"
 
-    ecape = calc_ecape(height, pressure, temperature, specific_humidity, u_wind, v_wind, cape_type, manual_cape)
+    ecape = calc_ecape(height, pressure, temperature, specific_humidity, u_wind, v_wind, cape_type, undiluted_cape)
     assert ecape.magnitude == approx(3.343908138651551e03, rel=0.01)
 
 

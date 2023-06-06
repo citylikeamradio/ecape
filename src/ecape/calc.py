@@ -316,7 +316,7 @@ def calc_ecape(
     u_wind: PintList,
     v_wind: PintList,
     cape_type: str = "most_unstable",
-    manual_cape: pint.Quantity = None,
+    undiluted_cape: pint.Quantity = None,
 ) -> pint.Quantity:
     """
     Calculate the entraining CAPE (ECAPE) of a parcel
@@ -337,8 +337,8 @@ def calc_ecape(
             Y component of the wind
         cape_type: np.ndarray[pint.Quantity]
             Variation of CAPE desired. 'most_unstable' (default), 'surface_based', or 'mixed_layer'
-        manual_cape: pint.Quantity
-            User-provided starting CAPE value
+        undiluted_cape: pint.Quantity
+            User-provided undiluted CAPE value
 
     Returns:
     ----------
@@ -362,10 +362,10 @@ def calc_ecape(
     dew_point_temperature = mpcalc.dewpoint_from_specific_humidity(pressure, temperature, specific_humidity)
 
     # whether the user has not / has overidden the cape calculations
-    if not manual_cape:
+    if not undiluted_cape:
         cape, _ = cape_func[cape_type](pressure, temperature, dew_point_temperature)
     else:
-        cape = manual_cape
+        cape = undiluted_cape
 
     # calculate the level of free convection (lfc) and equilibrium level (el) indexes
     lfc_idx, _ = calc_lfc_height(pressure, height_msl, temperature, dew_point_temperature, parcel_func[cape_type])

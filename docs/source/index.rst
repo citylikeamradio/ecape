@@ -60,7 +60,7 @@ Future Work
 
 Disclaimer
 -------------
-**If users prefer their own CAPE calculations, use the *manual_cape* parameter to override this decision:**
+**If users prefer their own CAPE calculations, use the *undiluted_cape* parameter to override this decision:**
 
 There is a ~10% difference in ECAPE between calc_ecape and Peters' published matlab scripts.
 This is primarily due to a difference in calculated CAPE. The tests describe other sources of error (~1%).
