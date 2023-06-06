@@ -16,7 +16,7 @@ ecape
 ====================
 
 ecape is a simple module that contains an entraining CAPE, or ECAPE, calculation described by :cite:t:`peters2023analytic`.
-Additionally, :cite:t:`Peters2023` -provided MatLab scripts serve as a reference and test verification data.
+:cite:t:`Peters2023`-provided MatLab scripts serve as a reference and test verification data.
 The module leans heavily on MetPy [:cite:t:`metpy`] for meteorological calculations.
 
 Package published via `Hatch <https://hatch.pypa.io/latest/>`_.
@@ -60,6 +60,8 @@ Future Work
 
 Disclaimer
 -------------
+**If users prefer their own CAPE calculations, use the *manual_cape* parameter to override this decision:**
+
 There is a ~10% difference in ECAPE between calc_ecape and Peters' published matlab scripts.
 This is primarily due to a difference in calculated CAPE. The tests describe other sources of error (~1%).
 
@@ -70,7 +72,6 @@ Since:
 
 MetPy's CAPE calculations were chosen for ease of readability and implementation.
 
-If users prefer their own CAPE calculations, use the *manual_cape* parameter to override this decision!
 
 References
 ------------

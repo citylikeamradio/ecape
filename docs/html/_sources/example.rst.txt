@@ -97,4 +97,4 @@ University of Wyoming soundings (trim below ground rows):
         manual_cape=spc_cape,
     )
 
-    print(f"mucape: {mucape} \necape:  {ecape}")
+    print(f"mucape: {spc_cape} \necape:  {ecape}")
