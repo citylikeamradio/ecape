@@ -74,12 +74,12 @@
   <section id="examples">
 <span id="example"></span><h1>examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h1>
 <p>For use in a script:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ecape.calc</span> <span class="kn">import</span> <span class="n">calc_ecape</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">metpy.units</span> <span class="kn">import</span> <span class="n">units</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">ecape.calc</span> <span class="kn">import</span> <span class="n">calc_ecape</span>
 
 <span class="n">sounding_loc</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./sounding.txt&quot;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">sounding_loc</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>

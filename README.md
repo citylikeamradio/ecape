@@ -64,7 +64,7 @@ Ryan M. May, Sean C. Arms, Patrick Marsh, Eric Bruning, John R. Leeman, Kevin Go
 
 John Peters. ECAPE scripts. 2 2023. URL: https://figshare.com/articles/software/ECAPE_scripts/21859818, doi:10.6084/m9.figshare.21859818.v4.
 
-John M. Peters, Daniel R. Chavas, Hugh Morrison, Chun-Yian Su, and Brice E. Coffer. An analytic formula for entraining cape in mid-latitude storm environments. 2023. arXiv:2301.04712.
+Peters, J. M., D. R. Chavas, C. Su, H. Morrison, and B. E. Coffer, 2023: An analytic formula for entraining CAPE in mid-latitude storm environments. J. Atmos. Sci., https://doi.org/10.1175/JAS-D-23-0003.1, in press.
 
 ### Licence
 

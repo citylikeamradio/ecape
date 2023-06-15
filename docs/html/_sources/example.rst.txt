@@ -7,12 +7,12 @@ For use in a script:
 
 .. code-block:: python
 
-    from ecape.calc import calc_ecape
-
     from pathlib import Path
 
-    import numpy as np
     from metpy.units import units
+    import numpy as np
+
+    from ecape.calc import calc_ecape
 
     sounding_loc = Path("./sounding.txt")
     data = np.genfromtxt(sounding_loc, delimiter=",")

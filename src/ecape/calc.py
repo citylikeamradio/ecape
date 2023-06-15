@@ -10,7 +10,7 @@ import pint
 from metpy.constants import dry_air_spec_heat_press, earth_gravity
 from metpy.units import check_units, units
 
-PintList = np.ndarray[pint.Quantity]
+PintList = np.typing.NDArray[pint.Quantity]
 
 
 @check_units("[pressure]", "[temperature]", "[temperature]")
